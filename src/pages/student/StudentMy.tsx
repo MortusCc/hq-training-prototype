@@ -2,7 +2,7 @@ import { Tag } from '../../components/Tag'
 import { useDb } from '../../state/db'
 
 export function StudentMyPage() {
-  const { db, session, payEnrollment } = useDb()
+  const { db, session, checkInEnrollment, payEnrollment } = useDb()
   const studentId = session?.userId
   const enrollments = db.enrollments.filter((e) => e.studentId === studentId)
 
@@ -30,6 +30,9 @@ export function StudentMyPage() {
               if (e.status === '已缴费' || e.status === '已签到' || e.status === '已完成') tone = 'green'
               if (e.status === '已拒绝') tone = 'red'
               const canPay = e.status === '已确认' && course.feeCny > 0 && !e.waived
+              const isCourseDay = course.startDate <= db.appToday && course.endDate >= db.appToday
+              const isPaidOrFree = e.waived || course.feeCny <= 0 || Boolean(e.paidAt)
+              const canCheckIn = e.status !== '已拒绝' && isCourseDay && !e.checkedInAt && isPaidOrFree
               return (
                 <tr key={e.id}>
                   <td>{course.title}</td>
@@ -42,13 +45,26 @@ export function StudentMyPage() {
                     {e.waived ? <div className="muted small">免收培训费（委托方学员）</div> : null}
                   </td>
                   <td>
-                    {canPay ? (
-                      <button className="btnPrimary" onClick={() => payEnrollment(e.id)}>
-                        立即缴费（模拟）
-                      </button>
-                    ) : (
-                      <span className="muted small">{e.paidAt ? `已缴费：${e.paidAt}` : '-'}</span>
-                    )}
+                    <div style={{ display: 'grid', gap: 8 }}>
+                      <div className="row">
+                        {canPay ? (
+                          <button className="btnPrimary" onClick={() => payEnrollment(e.id)}>
+                            立即缴费（模拟）
+                          </button>
+                        ) : null}
+                        {canCheckIn ? (
+                          <button className="btnGhost" onClick={() => checkInEnrollment(e.id)}>
+                            到场签到（模拟）
+                          </button>
+                        ) : null}
+                        {!canPay && !canCheckIn ? <span className="muted small">-</span> : null}
+                      </div>
+
+                      <div className="muted small">
+                        <div>{e.waived ? '缴费：免收培训费' : e.paidAt ? `缴费：${e.paidAt}` : '缴费：未缴费'}</div>
+                        <div>{e.checkedInAt ? `签到：${e.checkedInAt}` : isCourseDay ? '签到：未签到' : '签到：未到签到时间'}</div>
+                      </div>
+                    </div>
                   </td>
                 </tr>
               )

@@ -77,13 +77,7 @@ export function DashboardPage() {
             {session?.role === 'onsite' ? (
               <>
                 <Link className="navItem" to="/onsite/checkin">
-                  签到与收费
-                </Link>
-                <Link className="navItem" to="/onsite/survey">
-                  调查与报告
-                </Link>
-                <Link className="navItem" to="/reports">
-                  统计报表
+                  签到名单/资料发放
                 </Link>
               </>
             ) : null}
@@ -120,4 +114,3 @@ export function DashboardPage() {
     </div>
   )
 }
-

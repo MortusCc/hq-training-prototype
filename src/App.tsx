@@ -17,7 +17,6 @@ import { StudentCoursesPage } from './pages/student/StudentCourses'
 import { StudentMyPage } from './pages/student/StudentMy'
 import { StudentEvaluationPage } from './pages/student/StudentEvaluation'
 import { OnsiteCheckinPage } from './pages/onsite/OnsiteCheckin'
-import { OnsiteSurveyPage } from './pages/onsite/OnsiteSurvey'
 import { ReportsPage } from './pages/Reports'
 import { NotFoundPage } from './pages/NotFound'
 
@@ -52,7 +51,6 @@ function AppRoutes() {
         <Route path="/student/my" element={<StudentMyPage />} />
         <Route path="/student/evaluation" element={<StudentEvaluationPage />} />
         <Route path="/onsite/checkin" element={<OnsiteCheckinPage />} />
-        <Route path="/onsite/survey" element={<OnsiteSurveyPage />} />
         <Route path="/reports" element={<ReportsPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Route>
