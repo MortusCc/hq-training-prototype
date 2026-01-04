@@ -1,0 +1,63 @@
+:root {
+  --bg: #f6f7fb;
+  --panel: #ffffff;
+  --text: #0f172a;
+  --muted: #64748b;
+  --border: #e2e8f0;
+  --primary: #2563eb;
+  --primary-2: #1d4ed8;
+  --danger: #dc2626;
+  --warning: #d97706;
+  --success: #16a34a;
+  --shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Microsoft YaHei', Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color: var(--text);
+  background: var(--bg);
+  text-rendering: optimizeLegibility;
+  font-synthesis: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  font-weight: 500;
+  color: var(--primary);
+  text-decoration: inherit;
+}
+a:hover {
+  color: var(--primary-2);
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  padding: 10px 14px;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: inherit;
+  background: var(--panel);
+  color: var(--text);
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s, transform 0.02s;
+}
+button:hover {
+  border-color: #cbd5e1;
+}
+button:active {
+  transform: translateY(1px);
+}
+
+input,
+select,
+textarea {
+  font-family: inherit;
+}
