@@ -20,6 +20,7 @@ export type DbContextValue = {
   checkInEnrollment: (enrollmentId: Id) => void
   giveMaterial: (enrollmentId: Id) => void
   submitSurvey: (courseId: Id, studentId: Id, satisfaction: 1 | 2 | 3 | 4 | 5, comment: string) => void
+  writeOverallEvaluationSummary: (courseId: Id, summary: string, writerName: string) => void
   endCourse: (courseId: Id) => void
 }
 
@@ -40,7 +41,7 @@ export function roleLabel(role: Role): string {
     case 'student':
       return '学员端'
     case 'onsite':
-      return '现场端'
+      return '工作人员端'
   }
 }
 

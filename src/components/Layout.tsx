@@ -26,7 +26,7 @@ function useNavItems() {
     if (role === 'student') {
       return [...common, { to: '/student/courses', label: '课程浏览/报名' }, { to: '/student/my', label: '我的报名' }, { to: '/student/evaluation', label: '课程评价' }]
     }
-    return [...common, { to: '/onsite/checkin', label: '签到名单/资料发放' }]
+    return [...common, { to: '/onsite/checkin', label: '签到名单/资料发放' }, { to: '/onsite/survey', label: '课程评价/报告' }]
   }, [session?.role])
 }
 
@@ -42,7 +42,8 @@ function crumbFromPath(pathname: string): string {
     '/student/courses': '学员端 / 课程浏览与报名',
     '/student/my': '学员端 / 我的报名',
     '/student/evaluation': '学员端 / 课程评价',
-    '/onsite/checkin': '现场端 / 签到名单与资料发放',
+    '/onsite/checkin': '工作人员端 / 签到名单与资料发放',
+    '/onsite/survey': '工作人员端 / 培训调查与评价报告',
     '/reports': '统计报表',
   }
   return map[pathname] ?? pathname
@@ -82,7 +83,7 @@ export function AppLayout() {
         <div style={{ flex: 1 }} />
 
         <div className="hint small">
-          演示建议：先用「经理端」立项，再用「执行人端」发布通知，然后用「学员端」报名、缴费与签到，最后在「现场端」核对名单并发资料。
+          演示建议：先用「经理端」立项，再用「执行人端」发布通知，然后用「学员端」报名、缴费、签到与评价，最后在「工作人员端」核对名单、发放资料并汇总评价。
         </div>
       </aside>
 

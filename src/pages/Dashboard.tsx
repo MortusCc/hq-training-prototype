@@ -79,6 +79,9 @@ export function DashboardPage() {
                 <Link className="navItem" to="/onsite/checkin">
                   签到名单/资料发放
                 </Link>
+                <Link className="navItem" to="/onsite/survey">
+                  课程评价/报告
+                </Link>
               </>
             ) : null}
           </div>

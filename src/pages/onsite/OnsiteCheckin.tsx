@@ -12,7 +12,7 @@ export function OnsiteCheckinPage() {
 
   return (
     <div style={{ display: 'grid', gap: 12 }}>
-      <h2 className="pageTitle">签到名单与资料发放（现场端）</h2>
+      <h2 className="pageTitle">签到名单与资料发放（工作人员端）</h2>
 
       <div className="card">
         <div className="cardHeader">

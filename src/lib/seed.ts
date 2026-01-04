@@ -174,6 +174,18 @@ export function createSeedDb(): Db {
       executorId,
       status: '已发布',
     },
+    {
+      id: id('crs'),
+      title: '项目管理与团队协作（结课示例）',
+      topic: '项目管理 / 团队协作',
+      startDate: '2025-12-20',
+      endDate: '2025-12-20',
+      location: '浩奇公司培训教室B-201',
+      feeCny: 499,
+      lecturerId: realLecturers[0]!.id,
+      executorId,
+      status: '已结课',
+    },
   ]
 
   requests[1]!.generatedCourseId = courses[0]!.id
@@ -200,10 +212,31 @@ export function createSeedDb(): Db {
       materialGiven: false,
       waived: false,
     },
+    {
+      id: id('enr'),
+      courseId: courses[2]!.id,
+      studentId: users.find((u) => u.role === 'student' && u.name === '张学员')!.id,
+      status: '已完成',
+      createdAt: `2025-12-10 09:30`,
+      confirmedAt: `2025-12-10 09:35`,
+      paidAt: `2025-12-10 09:50`,
+      checkedInAt: `2025-12-20 08:45`,
+      materialGiven: true,
+      waived: false,
+    },
   ]
 
   const notices: NoticeHtml[] = []
-  const surveys: Survey[] = []
+  const surveys: Survey[] = [
+    {
+      id: id('svy'),
+      courseId: courses[2]!.id,
+      studentId: users.find((u) => u.role === 'student' && u.name === '张学员')!.id,
+      satisfaction: 4,
+      comment: '整体内容很实用，案例讲解清晰；建议增加更多小组实战演练与课后资料包。',
+      createdAt: `2025-12-20 19:00`,
+    },
+  ]
 
   const emailContacts = [
     { name: '周一鸣', email: 'zhou.yiming@example.com' },

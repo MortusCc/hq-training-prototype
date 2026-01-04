@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { Tag } from '../../components/Tag'
 import { useDb } from '../../state/db'
 import type { Id } from '../../types'
@@ -6,9 +6,13 @@ import type { Id } from '../../types'
 export function ExecutorCoursesPage() {
   const { db, updateCourse, publishCourseNotice, sendCourseReminder, endCourse } = useDb()
   const [selectedId, setSelectedId] = useState<Id | null>(null)
+  const [showEvaluation, setShowEvaluation] = useState(false)
 
   const current = selectedId ? db.courses.find((c) => c.id === selectedId) ?? null : null
   const lecturers = db.users.filter((u) => u.expertise)
+  const surveys = useMemo(() => (current ? db.surveys.filter((s) => s.courseId === current.id) : []), [current, db.surveys])
+  const avg =
+    surveys.length === 0 ? 0 : Math.round((surveys.reduce((sum, s) => sum + s.satisfaction, 0) / surveys.length) * 10) / 10
 
   return (
     <div style={{ display: 'grid', gap: 12 }}>
@@ -42,7 +46,13 @@ export function ExecutorCoursesPage() {
                     {c.status === '已结课' && <Tag tone="gray">已结课</Tag>}
                   </td>
                   <td>
-                    <button className="btnGhost" onClick={() => setSelectedId(c.id)}>
+                    <button
+                      className="btnGhost"
+                      onClick={() => {
+                        setSelectedId(c.id)
+                        setShowEvaluation(false)
+                      }}
+                    >
                       编辑
                     </button>
                   </td>
@@ -147,7 +157,76 @@ export function ExecutorCoursesPage() {
                     结束课程并归档
                   </button>
                 ) : null}
+                <button
+                  className="btnGhost"
+                  onClick={() => setShowEvaluation((v) => !v)}
+                  disabled={current.status !== '已结课' && surveys.length === 0 && !current.overallEvaluationSummary}
+                >
+                  查看课程评价
+                </button>
               </div>
+
+              {showEvaluation ? (
+                <div className="card" style={{ padding: 12 }}>
+                  <div className="cardHeader">
+                    <div>
+                      <div className="cardTitle">课程评价</div>
+                      <div className="muted small">
+                        平均满意度：{avg ? `${avg} / 5` : '-'}（{surveys.length} 份评价）
+                      </div>
+                    </div>
+                    <button className="btnGhost" onClick={() => setShowEvaluation(false)}>
+                      收起
+                    </button>
+                  </div>
+
+                  <div style={{ display: 'grid', gap: 10 }}>
+                    <div>
+                      <div className="muted small">总体课程评价</div>
+                      <div style={{ marginTop: 6 }}>{current.overallEvaluationSummary ? current.overallEvaluationSummary : '暂无总体评价。'}</div>
+                      {current.overallEvaluationUpdatedAt ? (
+                        <div className="muted small" style={{ marginTop: 6 }}>
+                          更新时间：{current.overallEvaluationUpdatedAt}（{current.overallEvaluationWriterName ?? '工作人员'}）
+                        </div>
+                      ) : null}
+                    </div>
+
+                    <div>
+                      <div className="muted small">学员个人课程评价</div>
+                      <table className="table" style={{ marginTop: 10 }}>
+                        <thead>
+                          <tr>
+                            <th>学员</th>
+                            <th>满意度</th>
+                            <th>意见与建议</th>
+                            <th>提交时间</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {surveys.map((s) => {
+                            const student = db.users.find((u) => u.id === s.studentId)
+                            return (
+                              <tr key={s.id}>
+                                <td>{student?.name ?? '-'}</td>
+                                <td className="muted small">{s.satisfaction} / 5</td>
+                                <td>{s.comment}</td>
+                                <td className="muted small">{s.createdAt}</td>
+                              </tr>
+                            )
+                          })}
+                          {surveys.length === 0 ? (
+                            <tr>
+                              <td colSpan={4} className="muted">
+                                暂无学员评价。
+                              </td>
+                            </tr>
+                          ) : null}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              ) : null}
             </div>
           ) : (
             <div className="muted small">请在左侧选择一门课程。</div>

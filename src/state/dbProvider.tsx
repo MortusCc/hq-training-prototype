@@ -260,6 +260,16 @@ export function DbProvider({ children }: { children: ReactNode }) {
     [],
   )
 
+  const writeOverallEvaluationSummary = useCallback((courseId: Id, summary: string, writerName: string) => {
+    const next = loadDb()
+    const course = next.courses.find((c) => c.id === courseId)
+    if (!course) return
+    course.overallEvaluationSummary = summary
+    course.overallEvaluationUpdatedAt = `${next.appToday} 20:10`
+    course.overallEvaluationWriterName = writerName
+    saveDb(next)
+  }, [])
+
   const endCourse = useCallback((courseId: Id) => {
     const next = loadDb()
     const course = next.courses.find((c) => c.id === courseId)
@@ -297,6 +307,7 @@ export function DbProvider({ children }: { children: ReactNode }) {
       checkInEnrollment,
       giveMaterial,
       submitSurvey,
+      writeOverallEvaluationSummary,
       endCourse,
     }),
     [
@@ -319,6 +330,7 @@ export function DbProvider({ children }: { children: ReactNode }) {
       setToday,
       submitSurvey,
       updateCourse,
+      writeOverallEvaluationSummary,
     ],
   )
 

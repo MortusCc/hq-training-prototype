@@ -60,6 +60,9 @@ export interface Course {
   status: CourseStatus
   noticeHtmlId?: Id
   reminderSentAt?: string
+  overallEvaluationSummary?: string
+  overallEvaluationUpdatedAt?: string
+  overallEvaluationWriterName?: string
 }
 
 export interface EnrollmentForm {
