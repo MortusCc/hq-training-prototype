@@ -61,6 +61,16 @@ export function DashboardPage() {
                 </Link>
               </>
             ) : null}
+            {session?.role === 'company' ? (
+              <>
+                <Link className="navItem" to="/company/requests">
+                  提交培训申请
+                </Link>
+                <Link className="navItem" to="/company/my">
+                  我的申请
+                </Link>
+              </>
+            ) : null}
             {session?.role === 'student' ? (
               <>
                 <Link className="navItem" to="/student/courses">

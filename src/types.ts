@@ -1,4 +1,4 @@
-export type Role = 'manager' | 'executor' | 'student' | 'onsite'
+export type Role = 'manager' | 'executor' | 'student' | 'onsite' | 'company'
 
 export type Id = string
 

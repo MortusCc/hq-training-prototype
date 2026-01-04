@@ -18,6 +18,8 @@ import { StudentMyPage } from './pages/student/StudentMy'
 import { StudentEvaluationPage } from './pages/student/StudentEvaluation'
 import { OnsiteCheckinPage } from './pages/onsite/OnsiteCheckin'
 import { OnsiteSurveyPage } from './pages/onsite/OnsiteSurvey'
+import { CompanyRequestsPage } from './pages/company/CompanyRequests'
+import { CompanyMyRequestsPage } from './pages/company/CompanyMyRequests'
 import { ReportsPage } from './pages/Reports'
 import { NotFoundPage } from './pages/NotFound'
 
@@ -48,6 +50,8 @@ function AppRoutes() {
         <Route path="/executor/lecturers" element={<ExecutorLecturersPage />} />
         <Route path="/executor/enrollments" element={<ExecutorEnrollmentsPage />} />
         <Route path="/executor/notices" element={<ExecutorNoticesPage />} />
+        <Route path="/company/requests" element={<CompanyRequestsPage />} />
+        <Route path="/company/my" element={<CompanyMyRequestsPage />} />
         <Route path="/student/courses" element={<StudentCoursesPage />} />
         <Route path="/student/my" element={<StudentMyPage />} />
         <Route path="/student/evaluation" element={<StudentEvaluationPage />} />

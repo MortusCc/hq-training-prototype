@@ -10,6 +10,9 @@ function useNavItems() {
     const role = session?.role
     const common: NavItem[] = [{ to: '/dashboard', label: '工作台' }]
     if (!role) return common
+    if (role === 'company') {
+      return [...common, { to: '/company/requests', label: '提交培训申请' }, { to: '/company/my', label: '我的申请' }]
+    }
     if (role === 'manager') {
       return [...common, { to: '/manager/requests', label: '培训申请评审' }, { to: '/manager/courses', label: '培训课程总览' }, { to: '/reports', label: '统计报表' }]
     }
@@ -33,6 +36,8 @@ function useNavItems() {
 function crumbFromPath(pathname: string): string {
   const map: Record<string, string> = {
     '/dashboard': '工作台',
+    '/company/requests': '软件公司端 / 提交培训申请',
+    '/company/my': '软件公司端 / 我的申请',
     '/manager/requests': '经理端 / 培训申请评审',
     '/manager/courses': '经理端 / 培训课程总览',
     '/executor/courses': '执行人端 / 课程管理',

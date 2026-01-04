@@ -15,6 +15,7 @@ export function LoginPage() {
       { role: 'executor', name: '李执行', hint: '发布课程、管理讲师、报名与通知' },
       { role: 'student', name: '张学员', hint: '浏览通知、报名、缴费、评价' },
       { role: 'onsite', name: '周现场', hint: '核对名单、发放资料、汇总课程评价' },
+      { role: 'company', name: '王敏', hint: '在线填写培训申请，提交给经理端评审' },
     ],
     [],
   )
@@ -78,6 +79,7 @@ export function LoginPage() {
               <option value="executor">执行人端</option>
               <option value="student">学员端</option>
               <option value="onsite">工作人员端</option>
+              <option value="company">软件公司端</option>
             </select>
             <input className="input" value={name} onChange={(e) => setName(e.target.value)} placeholder="显示名称（演示用）" />
           </div>

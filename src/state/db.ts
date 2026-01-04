@@ -42,6 +42,8 @@ export function roleLabel(role: Role): string {
       return '学员端'
     case 'onsite':
       return '工作人员端'
+    case 'company':
+      return '软件公司端'
   }
 }
 

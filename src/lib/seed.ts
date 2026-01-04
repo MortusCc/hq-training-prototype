@@ -32,6 +32,22 @@ export function createSeedDb(): Db {
     { id: id('usr'), role: 'onsite', name: '周现场', email: 'onsite@hq.com', phone: '010-88889999' },
     {
       id: id('usr'),
+      role: 'company',
+      name: '王敏',
+      email: 'wangmin@dongchen-soft.com',
+      phone: '13800001111',
+      companyId: companies[0]!.id,
+    },
+    {
+      id: id('usr'),
+      role: 'company',
+      name: '陈凯',
+      email: 'chenkai@qihang-tech.com',
+      phone: '13900002222',
+      companyId: companies[1]!.id,
+    },
+    {
+      id: id('usr'),
       role: 'student',
       name: '张学员',
       email: 'zhang.student@dongchen-soft.com',
