@@ -77,7 +77,7 @@ export function ManagerRequestsPage() {
 
         <div className="card">
           <div className="cardHeader">
-            <div className="cardTitle">申请详情 / 立项决策</div>
+            <div className="cardTitle">申请详情 / 培训计划决策</div>
             <div className="muted small">选择左侧一条申请进行评审。</div>
           </div>
 
@@ -124,7 +124,7 @@ export function ManagerRequestsPage() {
                     setNote('')
                   }}
                 >
-                  立项并生成课程草稿
+                  立项并新建培训计划
                 </button>
                 <button
                   className="btnDanger"
@@ -145,4 +145,3 @@ export function ManagerRequestsPage() {
     </div>
   )
 }
-
