@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import type { ReactNode } from 'react'
-import type { Db, Enrollment, Id, Session, TrainingRequest } from '../types'
+import type { Db, Enrollment, EnrollmentForm, Id, Session, TrainingRequest } from '../types'
 import { todayIso } from '../lib/date'
 import { createSeedDb } from '../lib/seed'
 import { clearSession, getSession } from './session'
@@ -170,7 +170,7 @@ export function DbProvider({ children }: { children: ReactNode }) {
     saveDb(next)
   }, [])
 
-  const applyCourse = useCallback((courseId: Id, studentId: Id, waived: boolean) => {
+  const applyCourse = useCallback((courseId: Id, studentId: Id, waived: boolean, form: EnrollmentForm) => {
     const next = loadDb()
     const existing = next.enrollments.find((e) => e.courseId === courseId && e.studentId === studentId)
     if (existing) return
@@ -184,6 +184,7 @@ export function DbProvider({ children }: { children: ReactNode }) {
         createdAt: now,
         materialGiven: false,
         waived,
+        form,
       },
       ...next.enrollments,
     ]

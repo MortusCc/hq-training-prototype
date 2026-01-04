@@ -64,13 +64,14 @@ export function ExecutorNoticesPage() {
                   const rows = db.enrollments
                     .filter((e) => e.courseId === course.id)
                     .map((e) => {
+                      const form = e.form
                       const student = db.users.find((u) => u.id === e.studentId)
                       const company = student?.companyId ? db.companies.find((c) => c.id === student.companyId) : undefined
                       return {
-                        学员: student?.name ?? '',
-                        公司: company?.name ?? '',
-                        邮箱: student?.email ?? '',
-                        电话: student?.phone ?? '',
+                        学员: form?.name ?? student?.name ?? '',
+                        公司: form?.companyName ?? company?.name ?? '',
+                        邮箱: form?.email ?? student?.email ?? '',
+                        电话: form?.phone ?? student?.phone ?? '',
                         状态: e.status,
                         是否免收培训费: e.waived ? '是' : '否',
                         报名时间: e.createdAt,

@@ -62,6 +62,17 @@ export interface Course {
   reminderSentAt?: string
 }
 
+export interface EnrollmentForm {
+  name: string
+  gender: string
+  companyName: string
+  jobTitle: string
+  skillLevel: string
+  email: string
+  phone: string
+  note: string
+}
+
 export interface Enrollment {
   id: Id
   courseId: Id
@@ -73,6 +84,7 @@ export interface Enrollment {
   checkedInAt?: string
   materialGiven: boolean
   waived: boolean
+  form?: EnrollmentForm
 }
 
 export interface Survey {
@@ -102,4 +114,3 @@ export interface Db {
   notices: NoticeHtml[]
   emailContacts: { name: string; email: string }[]
 }
-

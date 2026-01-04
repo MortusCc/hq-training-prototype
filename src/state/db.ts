@@ -1,5 +1,5 @@
 import { createContext, useContext } from 'react'
-import type { Db, Enrollment, Id, Role, Session, TrainingRequest } from '../types'
+import type { Db, Enrollment, EnrollmentForm, Id, Role, Session, TrainingRequest } from '../types'
 
 export type DbContextValue = {
   db: Db
@@ -14,7 +14,7 @@ export type DbContextValue = {
   updateCourse: (courseId: Id, patch: Partial<Db['courses'][number]>) => void
   publishCourseNotice: (courseId: Id) => void
   sendCourseReminder: (courseId: Id) => void
-  applyCourse: (courseId: Id, studentId: Id, waived: boolean) => void
+  applyCourse: (courseId: Id, studentId: Id, waived: boolean, form: EnrollmentForm) => void
   confirmEnrollment: (enrollmentId: Id) => void
   payEnrollment: (enrollmentId: Id) => void
   checkInEnrollment: (enrollmentId: Id) => void
@@ -45,4 +45,3 @@ export function roleLabel(role: Role): string {
 }
 
 export type { Db, Enrollment, Id }
-
